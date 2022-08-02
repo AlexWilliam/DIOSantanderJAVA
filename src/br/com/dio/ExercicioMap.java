@@ -1,11 +1,15 @@
 package br.com.dio;
 
+import br.com.dio.model.livros.ComparatorNomeLivro;
+import br.com.dio.model.livros.CompareNumPagina;
+import br.com.dio.model.livros.Livro;
+
 import java.util.*;
 
 public class ExercicioMap {
     public static void main(String[] args) {
 
-        System.out.println("Crie um dicionário que relacione os modelos e seus respectivos consumos");
+        /*System.out.println("Crie um dicionário que relacione os modelos e seus respectivos consumos");
         Map<String, Double> listaCarros = new HashMap<>(){{
             put("Gol", 14.4);
             put("Uno", 15.6);
@@ -106,7 +110,52 @@ public class ExercicioMap {
 
         System.out.println("Verifique se o Map está vazio");
         System.out.println(listaCarros.isEmpty());
-        System.out.println("\r\n");
+        System.out.println("\r\n");*/
+
+        System.out.println("--\tOrdem aleatória\t--");
+        Map<String, Livro> listaLivros = new HashMap<>(){{
+            put(" Hawking, Stephen", new Livro("Uma Breve História do Tempo", 256));
+            put(" Duhigg, Charles", new Livro("O Poder do Hábito", 408));
+            put(" Harari, Yuval Noah", new Livro("21 Lições Para o Século 21", 432));
+        }};
+        for(Map.Entry<String, Livro> livro : listaLivros.entrySet()) {
+            System.out.println(livro.getKey() + " - " + livro.getValue().getNome());
+        }
+        System.out.println("\n");
+
+        System.out.println("--\tOrdem Inserção\t--");
+        Map<String, Livro> listaLivros1 = new LinkedHashMap<>(){{
+            put(" Hawking, Stephen", new Livro("Uma Breve História do Tempo", 256));
+            put(" Duhigg, Charles", new Livro("O Poder do Hábito", 408));
+            put(" Harari, Yuval Noah", new Livro("21 Lições Para o Século 21", 432));
+        }};
+        for(Map.Entry<String, Livro> livro : listaLivros1.entrySet()) {
+            System.out.println(livro.getKey() + " - " + livro.getValue().getNome());
+        }
+        System.out.println("\n");
+
+        System.out.println("--\tOrdem alfabética autores\t--");
+        Map<String, Livro> listaLivros2 = new TreeMap<>(listaLivros1);
+        for(Map.Entry<String, Livro> livro : listaLivros2.entrySet()) {
+            System.out.println(livro.getKey() + " - " + livro.getValue().getNome());
+        }
+        System.out.println("\n");
+
+        System.out.println("--\tOrdem alfabética nome dos livros\t--");
+        Set<Map.Entry<String, Livro>> listaLivros3 = new TreeSet<>(new ComparatorNomeLivro());
+        listaLivros3.addAll(listaLivros1.entrySet());
+        for(Map.Entry<String, Livro> livro : listaLivros3) {
+            System.out.println(livro.getKey() + " - " + livro.getValue().getNome());
+        }
+        System.out.println("\n");
+
+        System.out.println("--\tOrdem alfabética numero\t--");
+        Set<Map.Entry<String, Livro>> listaLivros4 = new TreeSet<>(new CompareNumPagina());
+        listaLivros4.addAll(listaLivros1.entrySet());
+        for(Map.Entry<String, Livro> livro : listaLivros4) {
+            System.out.println(livro.getKey() + " - " + livro.getValue().getNome());
+        }
+        System.out.println("\n");
 
     }
 }
