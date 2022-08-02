@@ -1,8 +1,8 @@
-package br.com.dio.model;
+package br.com.dio.model.gato;
 
 import java.util.Objects;
 
-public class Gato {
+public class Gato implements Comparable<Gato>{
     private String nome;
     private String cor;
     private Integer idade;
@@ -59,5 +59,10 @@ public class Gato {
                 ", cor='" + cor + '\'' +
                 ", idade=" + idade +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Gato gato) {
+        return this.getNome().compareToIgnoreCase(gato.getNome());
     }
 }
